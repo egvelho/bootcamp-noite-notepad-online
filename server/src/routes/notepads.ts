@@ -34,13 +34,13 @@ const exampleNotepadsLookupTable = exampleNotepadsList.reduce(
 
 // Lista todos os notepads
 notepads.get("/", (req, res) => {
-  res.json(Object.values(exampleNotepadsLookupTable));
+  res.status(200).json(Object.values(exampleNotepadsLookupTable));
 });
 
 // Adiciona um novo notepad
 notepads.post("/", (req, res) => {
   req.body.createdAt = new Date(req.body.createdAt);
-  res.json({
+  res.status(201).json({
     success: true,
     data: {
       id: 1,
@@ -51,13 +51,13 @@ notepads.post("/", (req, res) => {
 
 // Carrega um notepad pelo id
 notepads.get("/:id", (req, res) => {
-  res.json(exampleNotepadsLookupTable[req.params.id]);
+  res.status(200).json(exampleNotepadsLookupTable[req.params.id]);
 });
 
 // Atualiza um notepad pelo id
 notepads.put("/:id", (req, res) => {
   req.body.createdAt = new Date(req.body.createdAt);
-  res.json({
+  res.status(200).json({
     success: true,
     data: {
       id: Number(req.params.id),
@@ -68,9 +68,8 @@ notepads.put("/:id", (req, res) => {
 
 // Atualização parcial de um notepad pelo id
 notepads.patch("/:id", (req, res) => {
-  console.log(req.body);
   req.body.createdAt &&= new Date(req.body.createdAt);
-  res.json({
+  res.status(200).json({
     success: true,
     data: {
       id: Number(req.params.id),
@@ -82,7 +81,7 @@ notepads.patch("/:id", (req, res) => {
 
 // Deleta um notepad pelo id
 notepads.delete("/:id", (req, res) => {
-  res.json({
+  res.status(200).json({
     success: true,
     data: {
       id: Number(req.params.id),
