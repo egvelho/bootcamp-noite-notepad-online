@@ -1,0 +1,2 @@
+GET http://localhost:8080/notepads/2
+Content-Type: application/json

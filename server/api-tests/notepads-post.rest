@@ -1,0 +1,9 @@
+POST http://localhost:8080/notepads
+Content-Type: application/json
+
+{
+    "title": "Um novo notepad",
+    "description": "Exemplo de notepad",
+    "content": "Um conteúdo maravilhoso sobre a importância dos notepads.",
+    "createdAt": "2023-02-14T00:26:07.011Z"
+}

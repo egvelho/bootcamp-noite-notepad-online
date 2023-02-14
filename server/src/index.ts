@@ -1,19 +1,13 @@
 import express from "express";
+import { notepads } from "./routes/notepads";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.json({
-    nome: "Eduardo",
-  });
-});
-
-app.get("/alunos", (req, res) => {
-  res.json(["Gustavo", "Felipe", "Camila", "Tiago", "Julia"]);
-});
+app.use(express.json());
+app.use("/notepads", notepads);
 
 const port = 8080;
-const host = "localhost";
+const host = "0.0.0.0";
 
 app.listen(port, host, () => {
   console.log(`Servidor express iniciado em http://${host}:${port}`);
