@@ -2,12 +2,12 @@ import type { Notepad } from "../types";
 
 export type NotepadListProps = {
   notepadList: Notepad[];
-  getNotepad: (id: number) => Promise<void>;
+  getNotepad: (id: number) => Promise<void> | void;
 };
 
 export function NotepadList({ notepadList, getNotepad }: NotepadListProps) {
   return (
-    <ul className="bg-white rounded-lg shadow-lg flex-[1]">
+    <ul className="bg-white rounded-lg shadow-lg flex-[1] overflow-y-auto md:max-w-sm">
       {notepadList?.map(({ id, title, description, createdAt }) => (
         <li
           key={id}

@@ -3,6 +3,7 @@ import { AppBar } from "./components/AppBar";
 import { useAxios } from "./useAxios";
 import { NotepadList } from "./components/NotepadList";
 import type { Notepad } from "./types";
+import { NotepadView } from "./components/NotepadView";
 
 function App() {
   const [{ data: notepadList }] = useAxios<Notepad[]>({
@@ -10,7 +11,7 @@ function App() {
     method: "get",
   });
 
-  const [{ data: currentNotepad }, getNotepad] = useAxios<Notepad>(
+  const [{ data: currentNotepad = {} }, getNotepad] = useAxios<Notepad>(
     {
       method: "get",
     },
@@ -23,17 +24,12 @@ function App() {
     <>
       <AppBar />
       <main>
-        <section className="flex flex-row gap-4 m-4">
-          <div className="bg-white rounded-lg shadow-lg p-4 flex-[2]">
-            <span>#{currentNotepad?.id}</span>
-            <h2>{currentNotepad?.title}</h2>
-            <p>{currentNotepad?.description}</p>
-            <p>{currentNotepad?.content}</p>
-          </div>
+        <section className="flex flex-col md:flex-row gap-4 m-4 md:max-h-[calc(100vh-64px-32px)] md:max-w-screen-lg lg:mx-auto">
+          <NotepadView {...currentNotepad} />
           {notepadList && (
             <NotepadList
               notepadList={notepadList}
-              getNotepad={async (id) => {
+              getNotepad={(id) => {
                 getNotepad({
                   url: `/notepads/${id}`,
                 });
