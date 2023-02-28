@@ -1,44 +1,19 @@
-import { useState } from "react";
 import { AppBar } from "./components/AppBar";
-import { useAxios } from "./useAxios";
-import { NotepadList } from "./components/NotepadList";
-import type { Notepad } from "./types";
-import { NotepadView } from "./components/NotepadView";
+import { Home } from "./routes/Home";
+import { CreateNotepad } from "./routes/CreateNotepad";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [{ data: notepadList }] = useAxios<Notepad[]>({
-    url: "/notepads",
-    method: "get",
-  });
-
-  const [{ data: currentNotepad = {} }, getNotepad] = useAxios<Notepad>(
-    {
-      method: "get",
-    },
-    {
-      manual: true,
-    }
-  );
-
   return (
-    <>
+    <Router>
       <AppBar />
       <main>
-        <section className="flex flex-col md:flex-row gap-4 m-4 md:max-h-[calc(100vh-64px-32px)] md:max-w-screen-lg lg:mx-auto">
-          <NotepadView {...currentNotepad} />
-          {notepadList && (
-            <NotepadList
-              notepadList={notepadList}
-              getNotepad={(id) => {
-                getNotepad({
-                  url: `/notepads/${id}`,
-                });
-              }}
-            />
-          )}
-        </section>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/criar-notepad" element={<CreateNotepad />} />
+        </Routes>
       </main>
-    </>
+    </Router>
   );
 }
 

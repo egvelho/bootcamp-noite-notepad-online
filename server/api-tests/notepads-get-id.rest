@@ -1,2 +1,2 @@
-GET http://localhost:8080/notepads/2
+GET http://localhost:8080/notepads/0
 Content-Type: application/json

@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
 import { Link } from "./Link";
 
 export function AppBar() {
+  const navigate = useNavigate();
+
   return (
     <header className="p-3 h-[64px] flex flex-row bg-white justify-between items-center shadow-md">
       <div className="flex flex-row items-center gap-6">
@@ -10,11 +13,17 @@ export function AppBar() {
           <span className="uppercase font-bold">Pastebin</span>
         </a>
         <nav className="hidden md:block">
-          <Link href="/">Página inicial</Link>
+          <Link to="/">Página inicial</Link>
         </nav>
       </div>
       <div className="flex flex-row items-center">
-        <Button>Criar notepad</Button>
+        <Button
+          onClick={() => {
+            navigate("/criar-notepad");
+          }}
+        >
+          Criar notepad
+        </Button>
       </div>
     </header>
   );
