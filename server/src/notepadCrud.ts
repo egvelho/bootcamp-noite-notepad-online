@@ -63,3 +63,19 @@ export async function getNotepads() {
 
   return notepads;
 }
+
+export async function updateNotepad(id: number, nextNotepad: Partial<Notepad>) {
+  const currentNotepadBuffer = await fs.readFile(`../notepads/${id}.json`);
+  const currentNotepad = JSON.parse(currentNotepadBuffer.toString());
+  const notepad = {
+    ...currentNotepad,
+    ...nextNotepad,
+  };
+
+  await fs.writeFile(
+    `../notepads/${id}.json`,
+    JSON.stringify(notepad, undefined, 2)
+  );
+
+  return { success: true, notepad };
+}

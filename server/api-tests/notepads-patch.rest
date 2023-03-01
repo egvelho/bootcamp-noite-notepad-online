@@ -1,6 +1,7 @@
-PATCH http://localhost:8080/notepads/1
+PATCH http://localhost:8080/notepads/4
 Content-Type: application/json
 
 {
+    "title": "Quarta publicação alterada",
     "description": "Uma nova descrição"
 }

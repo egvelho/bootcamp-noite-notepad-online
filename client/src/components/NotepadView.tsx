@@ -1,7 +1,9 @@
 import type { Notepad } from "../types";
+import { Link } from "./Link";
 
 const texts = {
   deleteButton: "Deletar",
+  editLink: "Editar",
 };
 
 export type NotepadViewProps = Partial<Notepad> & {
@@ -18,12 +20,15 @@ export function NotepadView({
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 flex-[2]">
       {id !== undefined && (
-        <button
-          className="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-1 px-2 rounded-md"
-          onClick={onDelete}
-        >
-          {texts.deleteButton}
-        </button>
+        <>
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-1 px-2 rounded-md mr-4"
+            onClick={onDelete}
+          >
+            {texts.deleteButton}
+          </button>
+          <Link to={`/editar-notepad/${id}`}>{texts.editLink}</Link>
+        </>
       )}
       <div>
         {id !== undefined && (

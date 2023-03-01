@@ -5,20 +5,9 @@ import * as notepadCrud from "../notepadCrud";
 
 export const notepads = express.Router();
 
-const exampleNotepad: Notepad = {
-  title: "Um título qualquer",
-  description: "Exemplo de descrição",
-  createdAt: new Date(),
-  content: `
-    Ainda assim, existem dúvidas a respeito de
-    como a competitividade nas transações
-    comerciais desafia a capacidade de
-    equalização do fluxo de informações.
-  `,
-};
-
 // Lista todos os notepads
 notepads.get("/", async (req, res) => {
+  console.log((req as any).requestDate);
   const notepads = await notepadCrud.getNotepads();
   res.status(200).json(notepads);
 });
@@ -48,15 +37,15 @@ notepads.put("/:id", (req, res) => {
 });
 
 // Atualização parcial de um notepad pelo id
-notepads.patch("/:id", (req, res) => {
-  req.body.createdAt &&= new Date(req.body.createdAt);
+notepads.patch("/:id", async (req, res) => {
+  const { success, notepad } = await notepadCrud.updateNotepad(
+    Number(req.params.id),
+    req.body
+  );
+
   res.status(200).json({
-    success: true,
-    data: {
-      id: Number(req.params.id),
-      ...exampleNotepad,
-      ...req.body,
-    },
+    success,
+    data: notepad,
   });
 });
 
