@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS notepads;
+
+CREATE TABLE notepads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  subtitle VARCHAR(255) NOT NULL,
+  created_at DATETIME DEFAULT NOW(),
+  content TEXT NOT NULL
+);
