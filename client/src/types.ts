@@ -3,5 +3,5 @@ export type Notepad = {
   title: string;
   description: string;
   content: string;
-  createdAt: string;
+  created_at: string;
 };
